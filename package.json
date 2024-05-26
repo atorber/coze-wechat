@@ -1,7 +1,7 @@
 {
-  "name": "wechat-remote",
-  "version": "0.1.1",
-  "description": "Wechaty Plugin Ecosystem Contrib Package",
+  "name": "coze-wechat",
+  "version": "0.1.0",
+  "description": "将coze接入wechat",
   "type": "module",
   "exports": {
     ".": {
@@ -15,13 +15,16 @@
     "npm": ">=7"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "crypto-js": "^4.2.0",
-    "language-monitor": "^1.0.3",
+    "file-box": "^1.5.5",
     "moment": "^2.30.1",
     "mqtt": "^4.3.8",
-    "mustache": "^4.2.0",
     "qrcode-terminal": "^0.12.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "wechaty": "^1.20.2",
+    "wechaty-puppet-bridge": "^0.10.4",
+    "wechaty-puppet-xp": "^1.13.12"
   },
   "devDependencies": {
     "@chatie/eslint-config": "^1.0.4",
@@ -29,13 +32,7 @@
     "@chatie/semver": "^0.4.7",
     "@chatie/tsconfig": "^4.6.2",
     "@types/crypto-js": "^4.1.3",
-    "@types/mustache": "^4.1.2",
-    "@types/uuid": "^9.0.7",
-    "wechaty": "^1.11.22",
-    "wechaty-mocker": "^1.10.2",
-    "file-box": "^1.5.5",
-    "wechaty-puppet-mock": "^1.11.2",
-    "wechat-remote": "^0.1.0"
+    "@types/uuid": "^9.0.7"
   },
   "scripts": {
     "build": "tsc && tsc -p tsconfig.cjs.json",
@@ -45,13 +42,11 @@
     "lint": "npm-run-all lint:es lint:ts lint:md",
     "lint:md": "markdownlint README.md",
     "lint:ts": "tsc --isolatedModules --noEmit",
-    "example": "cross-env NODE_OPTIONS=\"--no-warnings --loader=ts-node/esm\" node examples/ding-dong-bot.ts",
-    "start": "npm run example",
-    "start:mg": "cross-env NODE_OPTIONS=\"--no-warnings --loader=ts-node/esm\" node examples/mqtt-gateway.ts",
+    "start": "cross-env NODE_OPTIONS=\"--no-warnings --loader=ts-node/esm\" node src/index.ts",
     "test": "npm-run-all lint test:unit",
     "test:pack": "bash -x scripts/npm-pack-testing.sh",
     "test:unit": "cross-env NODE_OPTIONS=\"--no-warnings --loader=ts-node/esm\" tap \"src/**/*.spec.ts\" \"tests/**/*.spec.ts\"",
-    "lint:es": "eslint --fix --ignore-pattern tests/fixtures/ '{bin,examples,scripts,src,tests}/**/*.ts'"
+    "lint:es": "eslint --fix --ignore-pattern tests/fixtures/ '{scripts,src,tests}/**/*.ts'"
   },
   "repository": {
     "type": "git",

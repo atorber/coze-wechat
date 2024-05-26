@@ -6,19 +6,6 @@ import {
 
 import * as plugins             from '../src/mod.js'
 
-import {
-  WechatyBuilder,
-}                               from 'wechaty'
-
-test('integration testing', async t => {
-  const bot = WechatyBuilder.build({
-    puppet: 'wechaty-puppet-mock',
-  })
-
-  bot.use(plugins.DingDong())
-  t.ok(bot, 'should get a bot')
-})
-
 test('plugin name', async t => {
   for (const plugin of Object.values(plugins)) {
     if (typeof plugin !== 'function') {
