@@ -6,7 +6,8 @@ Coze Wechat将coze.cn智能体接入Wechat
 
 - 支持多轮对话
 - 支持回复图片
-- 只是设置白名单
+- 支持设置群白名单
+- 封装coze bot API
 
 ## 快速入门
 
