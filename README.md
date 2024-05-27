@@ -44,4 +44,4 @@ npm run start
 
 ## 体验群
 
-![room](./docs/images/room.jpg)
+<img src="./docs/images/room.jpg" alt="room" width="500">
