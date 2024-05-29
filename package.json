@@ -1,6 +1,6 @@
 {
   "name": "coze-wechat",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "将coze接入wechat",
   "type": "module",
   "exports": {

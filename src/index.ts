@@ -13,6 +13,7 @@ const puppet = process.env['WECHATY_PUPPET']
 let currentUser: Contact | null = null
 
 const whiteList = [ '插画诗', '吟诗一首' ]
+const needAt = process.env['NEED_AT'] === 'true' || false
 const coze_token = process.env['COZE_TOKEN'] || ''
 const bot_id = process.env['BOT_ID'] || ''
 const cozeBot = new CozeBot({
@@ -64,7 +65,7 @@ async function onMessage (msg: Message) {
 
   log.info('talker:', JSON.stringify(talker))
 
-  if (room && topic && whiteList.includes(topic)) {
+  if (room && topic && whiteList.includes(topic) && (!needAt || await msg.mentionSelf())) {
     if (isCozeCreating) {
       await room.say('当前有任务正在运行，请等待完成后继续对话~', ...[ talker ])
     } else {

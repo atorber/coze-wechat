@@ -8,6 +8,7 @@ Coze Wechat将coze.cn智能体接入Wechat
 - 支持回复图片
 - 支持设置群白名单
 - 封装coze bot API
+- 支持设置@回复或全部回复
 
 ## 快速入门
 
