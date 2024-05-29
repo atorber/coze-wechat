@@ -12,7 +12,9 @@ const token = process.env['WECHATY_TOKEN']
 const puppet = process.env['WECHATY_PUPPET']
 let currentUser: Contact | null = null
 
-const whiteList = [ '插画诗', '吟诗一首' ]
+const whiteListRoom = [ '插画诗', '吟诗一首' ] // 白名单群聊
+const whiteListContact = [ '大师' ] // 白名单联系人
+
 const needAt = process.env['NEED_AT'] === 'true' || false
 const coze_token = process.env['COZE_TOKEN'] || ''
 const bot_id = process.env['BOT_ID'] || ''
@@ -65,7 +67,7 @@ async function onMessage (msg: Message) {
 
   log.info('talker:', JSON.stringify(talker))
 
-  if (room && topic && whiteList.includes(topic) && (!needAt || await msg.mentionSelf())) {
+  if (room && topic && whiteListRoom.includes(topic) && (!needAt || await msg.mentionSelf())) {
     if (isCozeCreating) {
       await room.say('当前有任务正在运行，请等待完成后继续对话~', ...[ talker ])
     } else {
@@ -98,6 +100,38 @@ async function onMessage (msg: Message) {
         isCozeCreating = false
       }
     }
+  }
+
+  if (!room && whiteListContact.includes(talker.name())) {
+    const data: ChatV2Req = {
+      conversation_id: talker.id,
+      user: talker.name(),
+      query: text,
+      history_count: 5,
+      stream: false,
+    }
+    try {
+      isCozeCreating = true
+      const chatResp = await cozeBot.chat(data)
+      const urls = chatResp.extractImageUrls()
+      const answers = chatResp.extractAnswer()
+      if (urls.length > 0) {
+        for (const url of urls) {
+          const fileBox = FileBox.fromUrl(url)
+          await talker.say(fileBox)
+        }
+      } else {
+        if (answers.length > 0) {
+          const answer = answers[0]
+          await talker.say(answer?.content as string)
+        }
+      }
+      isCozeCreating = false
+    } catch (err) {
+      log.error('coze bot err:', err)
+      isCozeCreating = false
+    }
+
   }
 
 }

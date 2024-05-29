@@ -31,6 +31,15 @@ COZE_TOKEN='coze的API token'
 BOT_ID='coze的bot id'
 ```
 
+### 设置白名单
+
+修改src/index.ts中的群聊和好友白名单，仅白名单群或好友生效
+
+```typescript
+const whiteListRoom = [ '插画诗', '吟诗一首' ] // 白名单群聊
+const whiteListContact = [ '大师' ] // 白名单联系人
+```
+
 ### 启动机器人
 
 运行以下指令启动机器人
