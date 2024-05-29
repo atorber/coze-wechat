@@ -46,7 +46,7 @@ npm run start
 
 底层机器人基于wechaty实现，可以通过切换wechaty-puppet更换底层机器人,例如使用wechaty-puppet-xp
 
-```
+```bash
 npm i wechaty-puppet-xp@1.13.12
 ```
 
