@@ -42,6 +42,14 @@ npm run start
 
 > 注意注意注意：本项目为个人学习项目，请勿用于任何商业用途；建议使用小号登录，以免因封控带来不便
 
+## 机器人切换
+
+底层机器人基于wechaty实现，可以通过切换wechaty-puppet更换底层机器人,例如使用wechaty-puppet-xp
+
+```
+npm i wechaty-puppet-xp@1.13.12
+```
+
 ## 体验群
 
 <img src="./docs/images/room.jpg" alt="room" width="300">
